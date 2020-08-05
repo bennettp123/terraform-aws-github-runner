@@ -162,3 +162,64 @@ variable "userdata_post_install" {
   default     = ""
   description = "Script to be ran after the GitHub Actions runner is installed on the EC2 instances"
 }
+
+variable "minimum_runners" {
+  type        = number
+  default     = 0
+  description = "Prevent scaling down to fewer than this number during business hours"
+}
+
+variable "business_hours" {
+  type = list(
+    object({
+      dayOfWeek = number
+      startHour = number
+      endHour = number
+      offset = number
+    })
+  )
+  default = [
+    {
+      dayOfWeek = 0
+      startHour = 0
+      endHour   = 0
+      offset    = 8
+    },
+    {
+      dayOfWeek = 1
+      startHour = 9
+      endHour   = 17
+      offset    = 8
+    },
+    {
+      dayOfWeek = 2
+      startHour = 9
+      endHour   = 17
+      offset    = 8
+    },
+    {
+      dayOfWeek = 3
+      startHour = 9
+      endHour   = 17
+      offset    = 8
+    },
+    {
+      dayOfWeek = 4
+      startHour = 9
+      endHour   = 17
+      offset    = 8
+    },
+    {
+      dayOfWeek = 5
+      startHour = 9
+      endHour   = 17
+      offset    = 8
+    },
+    {
+      dayOfWeek = 6
+      startHour = 0
+      endHour   = 0
+      offset    = 8
+    },
+  ]
+}
